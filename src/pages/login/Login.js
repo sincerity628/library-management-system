@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Input, Button, Select } from 'semantic-ui-react';
+import { Input, Button, Select, Message } from 'semantic-ui-react';
+import { UserContext } from '../../contexts/UserContext';
 import api from '../../tools/api';
 import './login.css';
 
 const initUser = {
   identity: 0,
   id: '',
-  password: ''
+  pwd: ''
 }
 
 const initError = {
   id: false,
-  password: false
+  pwd: false,
+  isError: false,
+  text: ''
 }
 
 const identityList = [
@@ -23,6 +26,7 @@ const Login = () => {
   const [user, setUser] = useState(initUser);
   const [error, setError] = useState(initError);
   const [btnLoading, setBtnLoading] = useState(false);
+  const { signin } = useContext(UserContext);
 
   const handleChange = (v, e) => {
     setUser({
@@ -32,14 +36,14 @@ const Login = () => {
 
     setError({
       ...error,
-      [e.id]: false
+      [e.id]: false,
+      isError: false
     });
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // empty
-    console.log(user);
     for(let item in user) {
       if(user[item] === '') {
         setError({
@@ -57,9 +61,37 @@ const Login = () => {
       .login(user)
       .then(res => {
         console.log(res);
+        if(res.status === 200) {
+          let data = res.data;
+          setBtnLoading(false);
+          if(res.data.code === 0) {
+            setError({
+              ...error,
+              id: true,
+              isError: true,
+              errorText: 'User not exist.'
+            });
+          } else if(res.data.code === 1) {
+            setError({
+              ...error,
+              pwd: true,
+              isError: true,
+              errorText: 'Wrong Password.'
+            });
+          } else if(res.data.code === 2) {
+            // login success
+            signin(data);
+          }
+        }
       })
       .catch(error => {
-        console.log(error);
+        setBtnLoading(false);
+
+        setError({
+          ...error,
+          isError: true,
+          errorText: 'Something Wrong...'
+        });
       })
   }
 
@@ -90,19 +122,24 @@ const Login = () => {
           />
           <Input
             fluid
-            id="password"
+            id="pwd"
             type="password"
             autoComplete="off"
-            value={user.password}
-            error={error.password}
+            value={user.pwd}
+            error={error.pwd}
             className="form-input"
             placeholder="Password"
             onChange={handleChange}
           />
 
+          { error.isError ? (
+            <Message color="red">{ error.errorText }</Message>
+          ) : null }
+
           <Button
             className="form-btn"
             loading={btnLoading}
+            onClick={handleSubmit}
           >CONFIRM</Button>
         </form>
       </div>

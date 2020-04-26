@@ -1,12 +1,16 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Login from './pages/login/Login';
+import UserContextProvider from './contexts/UserContext';
+import Router from './tools/Router';
 
 function App() {
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Login />
+        <UserContextProvider>
+          <Router />
+        </UserContextProvider>
       </BrowserRouter>
     </div>
   );
