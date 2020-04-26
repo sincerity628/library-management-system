@@ -6,7 +6,6 @@ import { UserContext } from '../contexts/UserContext';
 
 const Router = () => {
   const { user } = useContext(UserContext);
-  console.log(user);
 
   return (
     <div>

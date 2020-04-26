@@ -13,12 +13,7 @@
   justify-content: center;
 }
 
-.login-page:hover::after {
-  filter: blur(10px);
-}
-
-.login-page::after {
-  content: '';
+.filter {
   transition: all 1s;
   filter: blur(0px);
   position: absolute;
@@ -31,6 +26,10 @@
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.login-form:hover~.filter {
+  filter: blur(10px);
 }
 
 .login-title,

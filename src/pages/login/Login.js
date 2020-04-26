@@ -60,7 +60,6 @@ const Login = () => {
     api
       .login(user)
       .then(res => {
-        console.log(res);
         if(res.status === 200) {
           let data = res.data;
           setBtnLoading(false);
@@ -143,6 +142,7 @@ const Login = () => {
           >CONFIRM</Button>
         </form>
       </div>
+      <div className="filter"></div>
     </div>
   );
 }
