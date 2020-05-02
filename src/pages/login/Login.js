@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Input, Button, Select, Message } from 'semantic-ui-react';
+import React, { useState, useContext } from 'react';
+import { Input, Button, Message } from 'semantic-ui-react';
 import { UserContext } from '../../contexts/UserContext';
 import api from '../../tools/api';
 import './login.css';
 
 const initUser = {
-  identity: 0,
   id: '',
   pwd: ''
 }
@@ -16,11 +15,6 @@ const initError = {
   isError: false,
   text: ''
 }
-
-const identityList = [
-  { value: 0, text: 'Manager' },
-  { value: 1, text: 'Reader' }
-];
 
 const Login = () => {
   const [user, setUser] = useState(initUser);
@@ -100,14 +94,6 @@ const Login = () => {
       <div className="login-form">
         <h2 className="form-title">Login</h2>
         <form onSubmit={handleSubmit}>
-          <Select
-            id="identity"
-            className="form-select"
-            placeholder="Identity"
-            value={user.identity}
-            onChange={handleChange}
-            options={identityList}
-          />
           <Input
             fluid
             id="id"
