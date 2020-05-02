@@ -62,7 +62,7 @@ const Login = () => {
               ...error,
               id: true,
               isError: true,
-              errorText: 'User not exist.'
+              errorText: 'User Not Exist.'
             });
           } else if(res.data.code === 1) {
             setError({

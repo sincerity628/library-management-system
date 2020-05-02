@@ -5,7 +5,6 @@ import './navbar.css';
 
 const Navbar = () => {
   const { user } = useContext(UserContext);
-  console.log(user);
   const [activeItem, setActiveItem] = useState("getin");
 
   const active = (item) => {
@@ -15,38 +14,43 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <nav>
+        <p className="nav-text">您好！管理员 { user.name }</p>
         <ul>
-          <li onClick={() => active("getin")}>
+          <li>
             <Link
-              className={activeItem === "getin" ? "active" : ""}
               to="/"
+              onClick={() => active("getin")}
+              className={activeItem === "getin" ? "active" : ""}
             >入库管理</Link>
           </li>
-          <li onClick={() => active("borrow")}>
+          <li>
             <Link
-              className={activeItem === "borrow" ? "active" : ""}
               to="/borrow"
+              onClick={() => active("borrow")}
+              className={activeItem === "borrow" ? "active" : ""}
             >借书管理</Link>
           </li>
-          <li onClick={() => active("reserve")}>
+          <li>
             <Link
-              className={activeItem === "reserve" ? "active" : ""}
               to="/reserve"
+              onClick={() => active("reserve")}
+              className={activeItem === "reserve" ? "active" : ""}
             >预约管理</Link>
           </li>
-          <li onClick={() => active("return")}>
+          <li>
             <Link
-              className={activeItem === "return" ? "active" : ""}
               to="/return"
+              onClick={() => active("return")}
+              className={activeItem === "return" ? "active" : ""}
             >还书管理</Link>
           </li>
-          <li onClick={() => active("list")}>
+          <li>
             <Link
-              className={activeItem === "list" ? "active" : ""}
               to="/list"
+              onClick={() => active("list")}
+              className={activeItem === "list" ? "active" : ""}
             >本馆图书目录</Link>
           </li>
-          <p className="nav-text">您好！管理员 { user.name }</p>
         </ul>
       </nav>
     </div>
