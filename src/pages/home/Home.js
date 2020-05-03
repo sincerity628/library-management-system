@@ -350,7 +350,7 @@ const Home = () => {
   return (
     <div className="home container">
       <aside className="side-menu">
-        <ul>
+        <ul className="home-list">
           <li><a href="#query">查询书目信息</a></li>
           <li><a href="#add-cip">录入书目信息</a></li>
           <li><a href="#delete-cip">删除书目信息</a></li>
@@ -366,6 +366,7 @@ const Home = () => {
               <p>请输入要查询的书目信息：</p>
               <Input
                 id="queryISBN"
+                fluid
                 value={queryISBN}
                 className="form-input"
                 onChange={handleInputChange1}
@@ -397,6 +398,7 @@ const Home = () => {
             <div className="input-group">
               <p>ISBN：</p>
               <Input
+                fluid
                 id="isbn"
                 typr="text"
                 value={addInfo.isbn}
@@ -408,6 +410,7 @@ const Home = () => {
             <div className="input-group">
               <p>书目名称：</p>
               <Input
+                fluid
                 id="name"
                 type="text"
                 value={addInfo.name}
@@ -419,6 +422,7 @@ const Home = () => {
             <div className="input-group">
               <p>作者：</p>
               <Input
+                fluid
                 id="writer"
                 type="text"
                 className="form-input"
@@ -430,6 +434,7 @@ const Home = () => {
             <div className="input-group">
               <p>所属出版社：</p>
               <Input
+                fluid
                 id="pub"
                 type="text"
                 value={addInfo.pub}
@@ -441,6 +446,7 @@ const Home = () => {
             <div className="input-group">
               <p>出版日期：</p>
               <Input
+                fluid
                 id="date"
                 type="text"
                 value={addInfo.date}
@@ -475,6 +481,7 @@ const Home = () => {
             <div className="input-group">
               <p>请输入要删除的书目 ISBN：</p>
               <Input
+                fluid
                 value={deleteISBN}
                 className="form-input"
                 onChange={handleInputChange3}
@@ -512,6 +519,7 @@ const Home = () => {
             <div className="input-group">
               <p>图书 ID：</p>
               <Input
+                fluid
                 id="id"
                 type="text"
                 value={addBook.id}
@@ -523,6 +531,7 @@ const Home = () => {
             <div className="input-group">
               <p>图书所属书目 ISBN：</p>
               <Input
+                fluid
                 id="isbn1"
                 type="text"
                 value={addBook.isbn}
@@ -534,6 +543,7 @@ const Home = () => {
             <div className="input-group">
               <p>图书位置：</p>
               <Select
+                fluid
                 id="address"
                 value={addBook.address}
                 options={selectList}
@@ -573,6 +583,7 @@ const Home = () => {
             <div className="input-group">
               <p>请输入要删除的图书 ID：</p>
               <Input
+                fluid
                 value={deleteBook}
                 className="form-input"
                 onChange={handleInputChange5}

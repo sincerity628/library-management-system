@@ -1,3 +1,62 @@
 .home {
-  
+  display: flex;
+  font-size: 18px;
+
+  .side-menu {
+    background-color: #fff;
+    padding: 50px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 290px;
+    position: fixed;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .home-list {
+    list-style: none;
+
+    li {
+      margin: 0 0 15px;
+    }
+
+    a {
+      color: #333;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  main {
+    background-color: #fff;
+    width: 70%;
+    margin-left: 350px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  section {
+    padding: 50px 100px;
+    border-bottom: 3px dashed #eeeeee;
+
+    &:last-of-type {
+      border: 0;
+    }
+  }
+
+  .input-group {
+    p {
+      margin: 0;
+      color: #777474;
+    }
+
+    .form-input {
+      margin: 8px 0 15px;
+    }
+  }
+
+  .form button {
+    margin-top: 15px;
+  }
 }
