@@ -22,6 +22,11 @@ p.nav-text {
   margin: 0;
 }
 
+.nav-btn:hover {
+  background-color: #5e5e5e !important;
+  color: #fff !important;
+}
+
 .navbar nav ul {
   display: flex;
   position: relative;

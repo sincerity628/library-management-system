@@ -1,20 +1,41 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
+import { Button } from 'semantic-ui-react';
 import './navbar.css';
 
+const btnStyle = {
+  background: 'transparent',
+  padding: '10px 18px',
+  border: '1px solid #5e5e5e',
+  borderRadius: '5px',
+  fontSize: '14px',
+  marginLeft : '15px',
+  fontWeight: 'bold',
+  color: '#5e5e5e',
+}
+
 const Navbar = () => {
-  const { user } = useContext(UserContext);
+  const { user, signout } = useContext(UserContext);
   const [activeItem, setActiveItem] = useState("getin");
+  const [btnLoading, setBtnLoading] = useState(false);
+
 
   const active = (item) => {
     setActiveItem(item);
   }
 
+  const handleLogout = () => {
+    setBtnLoading(true);
+    setTimeout(() => {
+      setBtnLoading(false);
+      signout();
+    }, 2000);
+  }
+
   return (
     <div className="navbar">
       <nav>
-        <p className="nav-text">您好！管理员 { user.name }</p>
         <ul>
           <li>
             <Link
@@ -52,6 +73,15 @@ const Navbar = () => {
             >本馆图书目录</Link>
           </li>
         </ul>
+        <p className="nav-text">
+          您好！管理员 { user.name }
+          <Button
+            onClick={handleLogout}
+            className="nav-btn"
+            loading={btnLoading}
+            style={btnStyle}
+          >退出登陆</Button>
+        </p>
       </nav>
     </div>
   );

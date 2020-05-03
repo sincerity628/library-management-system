@@ -312,6 +312,9 @@ const Home = () => {
         codes: [35],
         message: '请填写要删除图书信息！'
       });
+      setTimeout(() => {
+        setDeleteBookRes(initDeleteBookRes);
+      }, 3000);
       return;
     }
 
@@ -592,8 +595,8 @@ const Home = () => {
 
             { deleteBookRes.codes[0] === 35 ? (
               <Message error>
-              { deleteRes.message ? (
-                <p>{ deleteRes.message }</p>
+              { deleteBookRes.message ? (
+                <p>{ deleteBookRes.message }</p>
               ) : (
                 <p>删除失败，本馆不存在此图书</p>
               ) }</Message>
