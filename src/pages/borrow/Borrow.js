@@ -93,19 +93,19 @@ const Borrow = () => {
       .catch(error => {
         setBtnLoading(false);
         setRes({
-          code: '40',
+          code: 40,
           message: '借书失败...'
         });
         setTimeout(() => {
           setRes(initRes);
-        });
+        }, 3000);
       })
 
   }
 
   return (
-    <div className="borrow container">
-      <main>
+    <div className="container">
+      <div className="borrow">
         <div className="borrow-img"></div>
         <div className="form-box">
           <h2>办理借书手续</h2>
@@ -116,6 +116,7 @@ const Borrow = () => {
             <div className="input-group">
               <p>图书 ID：</p>
               <Input
+                fluid
                 id="bid"
                 type="text"
                 value={borrow.bid}
@@ -127,6 +128,7 @@ const Borrow = () => {
             <div className="input-group">
               <p>读者 ID：</p>
               <Input
+                fluid
                 id="rid"
                 type="text"
                 value={borrow.rid}
@@ -168,16 +170,18 @@ const Borrow = () => {
               onClick={handleFormSubmit}
             >借书</Button>
           </form>
-          <div className="receipt">
-            <h2>借阅凭据</h2>
-            <p>图书 ID：{ bookInfo.bid }</p>
-            <p>读者 ID：{ bookInfo.rid }</p>
-            <p>操作管理员 ID：{ bookInfo.mid }</p>
-            <p>借书时间：{ dealTime(bookInfo.botime) }</p>
-            <p>还书时间：{ dealTime(bookInfo.outime) }</p>
-          </div>
+          { bookInfo.bid === "" ? null : (
+            <div className="receipt">
+              <h2>借阅凭据</h2>
+              <p>图书 ID：{ bookInfo.bid }</p>
+              <p>读者 ID：{ bookInfo.rid }</p>
+              <p>操作管理员 ID：{ bookInfo.mid }</p>
+              <p>借书时间：{ dealTime(bookInfo.botime) }</p>
+              <p>应还书时间：{ dealTime(bookInfo.outime) }</p>
+            </div>
+          ) }
         </div>
-      </main>
+      </div>
     </div>
   );
 }
