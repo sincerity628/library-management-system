@@ -11,4 +11,5 @@ export default {
   // book
   addBook: (data) => request.post('/book/addBook', data),
   deleteBook: (data) => request.post('/book/deleteBook', data),
+  borrowBook: (data) => request.post('/book/borrowBook', data),
 };

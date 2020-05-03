@@ -1,6 +1,5 @@
 .home {
   display: flex;
-  font-size: 18px;
 
   .side-menu {
     background-color: #fff;
@@ -43,20 +42,5 @@
     &:last-of-type {
       border: 0;
     }
-  }
-
-  .input-group {
-    p {
-      margin: 0;
-      color: #777474;
-    }
-
-    .form-input {
-      margin: 8px 0 15px;
-    }
-  }
-
-  .form button {
-    margin-top: 15px;
   }
 }
