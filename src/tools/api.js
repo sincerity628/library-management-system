@@ -18,4 +18,5 @@ export default {
   getBorrow: () => request.get('/manager/getBorrow'),
   getCip: () => request.get('/manager/getCip'),
   getReserve: () => request.get('/manager/getReserve'),
+  getBook: (data) => request.post('/manager/getBook', data)
 };
