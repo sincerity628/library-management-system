@@ -98,6 +98,17 @@ const Borrow = () => {
           if(res.data.code === 46) {
             setBorrow(initBorrow);
             setBookInfo(res.data.boInfo);
+            
+            api
+              .getBorrow()
+              .then(res => {
+                if(res.status === 200) {
+                  setDetails(res.data.data);
+                }
+              })
+              .catch(error => {
+                console.log(error);
+              })
           }
           setTimeout(() => {
             setRes(initRes);

@@ -15,11 +15,10 @@ const btnStyle = {
   color: '#5e5e5e',
 }
 
-const Navbar = () => {
+const Navbar = (props) => {
   const { user, signout } = useContext(UserContext);
   const [activeItem, setActiveItem] = useState("getin");
   const [btnLoading, setBtnLoading] = useState(false);
-
 
   const active = (item) => {
     setActiveItem(item);
