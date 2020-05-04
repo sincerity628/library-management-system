@@ -1,0 +1,25 @@
+.book {
+  background-color: #fff;
+  padding: 50px;
+  position: relative;
+
+  h2, p {
+    margin: 0;
+    text-align: center;
+  }
+
+  p {
+    margin-top: 20px;
+    color: #717171;
+  }
+
+  span {
+    margin-right: 20px;
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+  }
+}

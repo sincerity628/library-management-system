@@ -6,6 +6,24 @@
   background-color: #f7f7f7;
 }
 
+.inner-container {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.detail {
+  background-color: #fff;
+  padding: 50px;
+
+  h2 {
+    color: #717171;
+    text-align: center;
+  }
+}
+
+.detail-table {
+  margin-top: 40px;
+}
+
 .form {
   .input-group {
     p {

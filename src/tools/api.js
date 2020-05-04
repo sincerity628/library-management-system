@@ -14,4 +14,8 @@ export default {
   borrowBook: (data) => request.post('/book/borrowBook', data),
   returnBook: (data) => request.post('/book/returnBook', data),
   reserveBook: (data) => request.post('/book/reserveBook', data),
+  // get data
+  getBorrow: () => request.get('/manager/getBorrow'),
+  getCip: () => request.get('/manager/getCip'),
+  getReserve: () => request.get('/manager/getReserve'),
 };

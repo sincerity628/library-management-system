@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import Navbar from '../components/navbar/Navbar';
+import Book from '../pages/book/Book';
 import Borrow from '../pages/borrow/Borrow';
 import Home from '../pages/home/Home';
 import List from '../pages/list/List';
@@ -19,6 +20,7 @@ const Router = () => {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route path="/book/:id" component={Book} />
             <Route path="/borrow" component={Borrow} />
             <Route path="/reserve" component={Reserve} />
             <Route path="/return" component={Return} />
