@@ -108,7 +108,7 @@ const Return = () => {
 
   return (
     <div className="container">
-      <div className="borrow return">
+      <div className="borrow return inner-container">
         <div className="return-img"></div>
         <div className="form-box">
           <h2>办理还书手续</h2>
