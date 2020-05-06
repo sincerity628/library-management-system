@@ -54,7 +54,9 @@ const List = () => {
                   <Table.Cell>{ detail.writer }</Table.Cell>
                   <Table.Cell>{ detail.pub }</Table.Cell>
                   <Table.Cell>{ detail.date }</Table.Cell>
-                  <Table.Cell>{ detail.num }</Table.Cell>
+                  <Table.Cell>
+                    <Link to={`/book/${detail.isbn}`}>{ detail.num }</Link>
+                  </Table.Cell>
                 </Table.Row>
               )) : null }
             </Table.Body>

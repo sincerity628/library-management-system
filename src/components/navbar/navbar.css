@@ -9,10 +9,10 @@
   align-items: center;
   justify-content: space-between;
   color: #222831;
-  font-size: 20px;
-  height: 90px;
+  font-size: 16px;
+  height: 70px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  padding: 0 150px;
+  padding: 0 100px;
   position: relative;
   z-index: 1;
 }
@@ -50,23 +50,23 @@ p.nav-text {
 
 .navbar li a:hover::after {
   content: '';
-  width: 80%;
+  width: 60%;
   height: 3px;
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -15px;
+  bottom: -10px;
 }
 
 .navbar a.active::after {
   color: #fff;
   content: '';
-  width: 80%;
+  width: 60%;
   height: 3px;
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -15px;
+  bottom: -10px;
 }

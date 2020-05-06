@@ -63,7 +63,7 @@ const Book = (props) => {
         console.log(error);
       })
 
-  }, []);
+  }, [props]);
 
   return (
     <div className="container">
@@ -84,26 +84,30 @@ const Book = (props) => {
           出版时间：{ isbn.date }
         </p>
         <div className="detail-table">
-          <Table basic textAlign="center">
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>#</Table.HeaderCell>
-                <Table.HeaderCell>图书 ID</Table.HeaderCell>
-                <Table.HeaderCell>位置</Table.HeaderCell>
-                <Table.HeaderCell>状态</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              { details.length ? details.map((detail, index) => (
-                <Table.Row key={index}>
-                  <Table.Cell>{ index + 1 }</Table.Cell>
-                  <Table.Cell>{ detail.id }</Table.Cell>
-                  <Table.Cell>{ transAdd(detail.address) }</Table.Cell>
-                  <Table.Cell>{ transSta(detail.status) }</Table.Cell>
+          { details.length ? (
+            <Table basic textAlign="center">
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>#</Table.HeaderCell>
+                  <Table.HeaderCell>图书 ID</Table.HeaderCell>
+                  <Table.HeaderCell>位置</Table.HeaderCell>
+                  <Table.HeaderCell>状态</Table.HeaderCell>
                 </Table.Row>
-              )) : null }
-            </Table.Body>
-          </Table>
+              </Table.Header>
+              <Table.Body>
+                { details.length ? details.map((detail, index) => (
+                  <Table.Row key={index}>
+                    <Table.Cell>{ index + 1 }</Table.Cell>
+                    <Table.Cell>{ detail.id }</Table.Cell>
+                    <Table.Cell>{ transAdd(detail.address) }</Table.Cell>
+                    <Table.Cell>{ transSta(detail.status) }</Table.Cell>
+                  </Table.Row>
+                )) : null }
+              </Table.Body>
+            </Table>
+          ) : (
+            <div className="no-book">此书目下暂无图书...</div>
+          ) }
         </div>
       </div>
     </div>
