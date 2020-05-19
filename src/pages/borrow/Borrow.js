@@ -16,7 +16,8 @@ const initError = {
 }
 
 const initRes = {
-  code: ''
+  code: '',
+  Resbid: 0
 }
 
 const initBookInfo = {
@@ -55,6 +56,8 @@ const Borrow = () => {
       [v.id]: v.value
     });
     setError(initError);
+
+    setBookInfo(initBookInfo);
   }
 
   const dealTime = (time) => {
@@ -85,6 +88,7 @@ const Borrow = () => {
     }
 
     setBtnLoading(true);
+    setBookInfo(initBookInfo);
 
     const data = borrow;
     data.mid = user.id;
@@ -92,13 +96,14 @@ const Borrow = () => {
     api
       .borrowBook(data)
       .then(res => {
+        console.log(res);
         setBtnLoading(false);
         if(res.status === 200) {
           setRes(res.data);
           if(res.data.code === 46) {
             setBorrow(initBorrow);
             setBookInfo(res.data.boInfo);
-            
+
             api
               .getBorrow()
               .then(res => {
@@ -190,6 +195,9 @@ const Borrow = () => {
               { res.code === 46 ? (
                 <Message success>借书成功</Message>
               ) : null }
+              { res.code === 47 ? (
+                <Message error>借书失败，该读者预定的图书 ID 是：{ res.ResBid }</Message>
+              ) : null }
 
               <Button
                 loading={btnLoading}
@@ -210,32 +218,36 @@ const Borrow = () => {
         </div>
         <div className="detail">
           <h2>历史借书记录</h2>
-          <div className="detail-table">
-            <Table basic textAlign="center">
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>#</Table.HeaderCell>
-                  <Table.HeaderCell>图书 ID</Table.HeaderCell>
-                  <Table.HeaderCell>读者 ID</Table.HeaderCell>
-                  <Table.HeaderCell>操作管理员 ID</Table.HeaderCell>
-                  <Table.HeaderCell>借书时间</Table.HeaderCell>
-                  <Table.HeaderCell>应还书时间</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                { details.length ? details.map((detail, index) => (
-                  <Table.Row key={index}>
-                    <Table.Cell>{ index + 1 }</Table.Cell>
-                    <Table.Cell>{ detail.bid }</Table.Cell>
-                    <Table.Cell>{ detail.rid }</Table.Cell>
-                    <Table.Cell>{ detail.mid }</Table.Cell>
-                    <Table.Cell>{ dealTime(detail.botime) }</Table.Cell>
-                    <Table.Cell>{ dealTime(detail.outime) }</Table.Cell>
+          { details.length ? (
+            <div className="detail-table">
+              <Table basic textAlign="center">
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>#</Table.HeaderCell>
+                    <Table.HeaderCell>图书 ID</Table.HeaderCell>
+                    <Table.HeaderCell>读者 ID</Table.HeaderCell>
+                    <Table.HeaderCell>操作管理员 ID</Table.HeaderCell>
+                    <Table.HeaderCell>借书时间</Table.HeaderCell>
+                    <Table.HeaderCell>应还书时间</Table.HeaderCell>
                   </Table.Row>
-                )) : null }
-              </Table.Body>
-            </Table>
-          </div>
+                </Table.Header>
+                <Table.Body>
+                  { details.length ? details.map((detail, index) => (
+                    <Table.Row key={index}>
+                      <Table.Cell>{ index + 1 }</Table.Cell>
+                      <Table.Cell>{ detail.bid }</Table.Cell>
+                      <Table.Cell>{ detail.rid }</Table.Cell>
+                      <Table.Cell>{ detail.mid }</Table.Cell>
+                      <Table.Cell>{ dealTime(detail.botime) }</Table.Cell>
+                      <Table.Cell>{ dealTime(detail.outime) }</Table.Cell>
+                    </Table.Row>
+                  )) : null }
+                </Table.Body>
+              </Table>
+            </div>
+          ) : (
+            <div className="no-book">暂无历史结束记录...</div>
+          ) }
         </div>
       </div>
     </div>

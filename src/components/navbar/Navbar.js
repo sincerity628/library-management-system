@@ -69,7 +69,14 @@ const Navbar = (props) => {
               to="/list"
               onClick={() => active("list")}
               className={activeItem === "list" ? "active" : ""}
-            >本馆图书目录</Link>
+            >图书目录</Link>
+          </li>
+          <li>
+            <Link
+              to="/reader"
+              onClick={() => active("reader")}
+              className={activeItem === "reader" ? "active" : ""}
+            >读者名单</Link>
           </li>
         </ul>
         <p className="nav-text">

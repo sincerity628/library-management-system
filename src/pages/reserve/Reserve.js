@@ -52,6 +52,7 @@ const Reserve = () => {
       [v.id]: v.value
     });
     setError(initError);
+    setBookInfo(initBookInfo);
   }
 
   const dealTime = (time) => {
@@ -103,6 +104,7 @@ const Reserve = () => {
     }
 
     setBtnLoading(true);
+    setBookInfo(initBookInfo);
 
     const data = borrow;
 
@@ -115,6 +117,17 @@ const Reserve = () => {
           if(res.data.code === 64) {
             setBorrow(initBorrow);
             setBookInfo(res.data.resInfo);
+
+            api
+              .getReserve()
+              .then(res => {
+                if(res.status === 200) {
+                  setDetails(res.data.data);
+                }
+              })
+              .catch(error => {
+                console.log(error);
+              })
           }
           setTimeout(() => {
             setRes(initRes);
@@ -218,30 +231,34 @@ const Reserve = () => {
         </div>
         <div className="detail">
           <h2>历史预约记录</h2>
-          <div className="detail-table">
-            <Table basic textAlign="center">
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>#</Table.HeaderCell>
-                  <Table.HeaderCell>图书书目 ISBN：</Table.HeaderCell>
-                  <Table.HeaderCell>读者 ID</Table.HeaderCell>
-                  <Table.HeaderCell>预约开始时间</Table.HeaderCell>
-                  <Table.HeaderCell>预约结束时间</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                { details.length ? details.map((detail, index) => (
-                  <Table.Row key={index}>
-                    <Table.Cell>{ index + 1 }</Table.Cell>
-                    <Table.Cell>{ detail.isbn }</Table.Cell>
-                    <Table.Cell>{ detail.rid }</Table.Cell>
-                    <Table.Cell>{ dealTime(detail.begtime) }</Table.Cell>
-                    <Table.Cell>{ dealTime(detail.endtime) }</Table.Cell>
+          { details.length ? (
+            <div className="detail-table">
+              <Table basic textAlign="center">
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>#</Table.HeaderCell>
+                    <Table.HeaderCell>图书书目 ISBN：</Table.HeaderCell>
+                    <Table.HeaderCell>读者 ID</Table.HeaderCell>
+                    <Table.HeaderCell>预约开始时间</Table.HeaderCell>
+                    <Table.HeaderCell>预约结束时间</Table.HeaderCell>
                   </Table.Row>
-                )) : null }
-              </Table.Body>
-            </Table>
-          </div>
+                </Table.Header>
+                <Table.Body>
+                  { details.length ? details.map((detail, index) => (
+                    <Table.Row key={index}>
+                      <Table.Cell>{ index + 1 }</Table.Cell>
+                      <Table.Cell>{ detail.isbn }</Table.Cell>
+                      <Table.Cell>{ detail.rid }</Table.Cell>
+                      <Table.Cell>{ dealTime(detail.begtime) }</Table.Cell>
+                      <Table.Cell>{ dealTime(detail.endtime) }</Table.Cell>
+                    </Table.Row>
+                  )) : null }
+                </Table.Body>
+              </Table>
+            </div>
+          ) : (
+            <div className="no-book">暂无历史预约记录...</div>
+          ) }
         </div>
       </div>
     </div>

@@ -61,6 +61,26 @@ const initDeleteBookRes = {
   codes: [0]
 }
 
+const initAddReader = {
+  readerId: "",
+  readerName: "",
+  phone: "",
+  email: "",
+  pwd: ""
+}
+
+const initAddReaderError = {
+  readerId: false,
+  readerName: false,
+  email: false,
+  phone: false,
+  pwd: false
+}
+
+const initAddReaderRes = {
+  code: 0
+}
+
 const Home = () => {
   const { user } = useContext(UserContext);
   // query
@@ -85,6 +105,11 @@ const Home = () => {
   const [deleteBook, setDeleteBook] = useState("");
   const [btnLoading5, setBtnLoading5] = useState(false);
   const [deleteBookRes, setDeleteBookRes] = useState(initDeleteBookRes);
+  // reader register
+  const [addReader, setAddReader] = useState(initAddReader);
+  const [addReaderError, setAddReaderError] = useState(initAddReaderError);
+  const [addReaderRes, setAddReaderRes] = useState(initAddReaderRes);
+  const [btnLoading6, setBtnLoading6] = useState(false);
 
   // query
   const handleInputChange1 = (e, v) => {
@@ -350,6 +375,70 @@ const Home = () => {
       })
   }
 
+  // reader register
+  const handleInputChange6 = (e, v) => {
+    setAddReader({
+      ...addReader,
+      [v.id]: v.value
+    });
+    setAddReaderError({
+      ...addReaderError,
+      [v.id]: false
+    });
+  }
+
+  const handleFormSubmit6 = (e) => {
+    e.preventDefault();
+
+    for(let item in addReader) {
+      if(addReader[item] === "") {
+        setAddReaderError({
+          ...addReaderError,
+          [item]: true
+        });
+        return;
+      }
+    }
+
+    setBtnLoading6(true);
+    const data = {
+      id: addReader.readerId,
+      name: addReader.readerName,
+      phone: addReader.phone,
+      email: addReader.email,
+      pwd: addReader.pwd
+    }
+
+    api
+      .addReader(data)
+      .then(res => {
+        setBtnLoading6(false);
+        if(res.status === 200) {
+          setAddReaderRes({
+            code: res.data.code
+          });
+
+          if(res.data.code === 6) {
+            setAddReader(initAddReader);
+          }
+
+          setTimeout(() => {
+            setAddReaderRes(initAddReaderRes);
+          }, 3000);
+        }
+      })
+      .catch(error => {
+        setBtnLoading6(false);
+        setAddReaderRes({
+          code: 5,
+          message: "用户注册失败..."
+        });
+        setTimeout(() => {
+          setAddReaderRes(initAddReaderRes);
+        }, 3000);
+      })
+  }
+
   return (
     <div className="home container">
       <aside className="side-menu">
@@ -359,6 +448,7 @@ const Home = () => {
           <li><a href="#delete-cip">删除书目信息</a></li>
           <li><a href="#add-book">录入图书信息</a></li>
           <li><a href="#delete-book">删除图书信息</a></li>
+          <li><a href="#reader-register">读者注册</a></li>
         </ul>
       </aside>
       <main>
@@ -615,6 +705,89 @@ const Home = () => {
               loading={btnLoading5}
               onClick={handleFormSubmit5}
             >删除</Button>
+          </form>
+        </section>
+
+        <section id="reader-register">
+          <h2>读者注册</h2>
+          <form className="form" onSubmit={handleFormSubmit6}>
+            <div className="input-group">
+              <p>用户ID：</p>
+              <Input
+                fluid
+                id="readerId"
+                error={addReaderError.readerId}
+                value={addReader.readerId}
+                className="form-input"
+                onChange={handleInputChange6}
+              />
+            </div>
+
+            <div className="input-group">
+              <p>用户姓名：</p>
+              <Input
+                fluid
+                id="readerName"
+                error={addReaderError.readerName}
+                value={addReader.readerName}
+                className="form-input"
+                onChange={handleInputChange6}
+              />
+            </div>
+
+            <div className="input-group">
+              <p>联系电话：</p>
+              <Input
+                fluid
+                id="phone"
+                error={addReaderError.phone}
+                value={addReader.phone}
+                className="form-input"
+                onChange={handleInputChange6}
+              />
+            </div>
+
+            <div className="input-group">
+              <p>邮箱：</p>
+              <Input
+                fluid
+                id="email"
+                error={addReaderError.email}
+                value={addReader.email}
+                type="email"
+                className="form-input"
+                onChange={handleInputChange6}
+              />
+            </div>
+
+            <div className="input-group">
+              <p>密码：</p>
+              <Input
+                fluid
+                id="pwd"
+                error={addReaderError.pwd}
+                value={addReader.pwd}
+                className="form-input"
+                onChange={handleInputChange6}
+              />
+            </div>
+
+            { addReaderRes.code === 5 ? (
+              <Message error>
+              { addReaderRes.message ? (
+                <p>{ addReaderRes.message }</p>
+              ) : (
+                <p>用户已存在，添加失败</p>
+              ) }</Message>
+            ) : null }
+            { addReaderRes.code === 6 ? (
+              <Message success>添加成功！</Message>
+            ) : null }
+
+            <Button
+              loading={btnLoading6}
+              onClick={handleFormSubmit6}
+            >注册</Button>
           </form>
         </section>
       </main>

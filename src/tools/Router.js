@@ -7,6 +7,7 @@ import Borrow from '../pages/borrow/Borrow';
 import Home from '../pages/home/Home';
 import List from '../pages/list/List';
 import Login from '../pages/login/Login';
+import ReaderList from '../pages/reader-list/ReaderList';
 import Reserve from '../pages/reserve/Reserve';
 import Return from '../pages/return/Return';
 
@@ -25,6 +26,7 @@ const Router = () => {
             <Route path="/reserve" component={Reserve} />
             <Route path="/return" component={Return} />
             <Route path="/list" component={List} />
+            <Route path="/reader" component={ReaderList} />
           </Switch>
         </div>
       ) : (

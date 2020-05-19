@@ -18,5 +18,8 @@ export default {
   getBorrow: () => request.get('/manager/getBorrow'),
   getCip: () => request.get('/manager/getCip'),
   getReserve: () => request.get('/manager/getReserve'),
-  getBook: (data) => request.post('/manager/getBook', data)
+  getBook: (data) => request.post('/manager/getBook', data),
+  // reader
+  addReader: (data) => request.post('/reader/addReader', data),
+  getReader: () => request.get('/reader/getReader')
 };

@@ -42,6 +42,8 @@ const Return = () => {
       [v.id]: v.value
     });
     setError(initError);
+    // 将还书凭证置空
+    setBookInfo(initBookInfo);
   }
 
   const dealTime = (time) => {
@@ -73,10 +75,11 @@ const Return = () => {
 
     setBtnLoading(true);
 
+    // 将还书凭证置空
+    setBookInfo(initBookInfo);
+
     const data = borrow;
     data.mid = user.id;
-
-    console.log(data);
 
     api
       .returnBook(data)

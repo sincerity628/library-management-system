@@ -34,7 +34,7 @@ p.nav-text {
 }
 
 .navbar li {
-  width: 160px;
+  width: 130px;
   text-align: center;
   position: relative;
 }
@@ -50,7 +50,7 @@ p.nav-text {
 
 .navbar li a:hover::after {
   content: '';
-  width: 60%;
+  width: 80%;
   height: 3px;
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
@@ -62,7 +62,7 @@ p.nav-text {
 .navbar a.active::after {
   color: #fff;
   content: '';
-  width: 60%;
+  width: 80%;
   height: 3px;
   background-color: rgba(0, 0, 0, 0.6);
   position: absolute;
